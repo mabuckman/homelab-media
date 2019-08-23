@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cp {*.service, env.list} /etc/systemd/system
+cp *.service env.list /etc/systemd/system
 
 systemctl daemon-reload
 systemctl enable docker-jackett.service
