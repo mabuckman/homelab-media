@@ -12,7 +12,7 @@ ExecStart=/usr/bin/docker run --rm \
   --cap-add=NET_ADMIN \
   -v /home/matt/media:/media \
   -v /etc/localtime:/etc/localtime:ro \
-  --env-file env.list \
+  --env-file /etc/systemd/system/env.list \
   --log-driver json-file \
   --log-opt max-size=10m \
   -p 9091:9091 \
