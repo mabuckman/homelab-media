@@ -10,7 +10,7 @@ RestartSec=30
 ExecStart=/usr/bin/docker run --rm \
   --name=transmission \
   --cap-add=NET_ADMIN \
-  -v ~/media:/media \
+  -v /mnt:/mnt \
   -v /etc/localtime:/etc/localtime:ro \
   --env-file /etc/systemd/system/env.list \
   --log-driver json-file \

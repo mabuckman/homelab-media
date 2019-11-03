@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker run --rm \
+  --name=sabnzbd \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=America/Chicago \
+  -v $HOME/sabznb:/config \
+  -v /mnt:/mnt \
+  --net=container:vpn \
+  -d linuxserver/sabnzbd

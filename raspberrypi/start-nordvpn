@@ -1,0 +1,8 @@
+#!/bin/bash
+
+docker run -ti --cap-add=NET_ADMIN --device /dev/net/tun --name vpn \
+            -e USER= -e PASS="" \
+            -e COUNTRY=United_States -e CATEGORY="Standard VPN servers" \
+	    -e NETWORK=192.168.0.0/24 \
+	    -p 8080:8080 -p 9090:9090 \
+            -e PROTOCOL=UDP -d bubuntux/nordvpn
