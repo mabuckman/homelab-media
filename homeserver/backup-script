@@ -1,0 +1,10 @@
+#!/bin/bash
+
+directory=/volumes/
+
+for d in ${directory}*/ ; do
+	time=$(date +"%Y-%m-%dT%H:%M:%S");
+	file="${directory}backups/${d:${#directory}:-1}-${time}.zip";
+	echo ${file};
+	zip -r ${file} ${d} -x "*config/MediaCover*";
+done
