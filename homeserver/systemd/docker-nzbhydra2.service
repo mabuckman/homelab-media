@@ -1,5 +1,5 @@
 [Unit]
-Description=Jackett docker container
+Description=nzbhydra2 docker container
 Requires=docker.service
 After=docker.service
 
@@ -8,16 +8,16 @@ Restart=always
 RestartSec=30
 
 ExecStart=/usr/bin/docker run --rm \
-  --name=jackett \
+  --name=nzbhydra2 \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=America/Chicago \
-  -p 9117:9117 \
-  -v /volumes/jackett/config:/config \
-  -v /volumes/jackett/downloads:/downloads \
-  linuxserver/jackett
+  -p 5076:5076 \
+  -v /volumes/nzbhydra2/config:/config \
+  -v /volumes/nzbhydra2/downloads:/downloads \
+linuxserver/nzbhydra2
 
-ExecStop=/usr/bin/docker stop jackett
+ExecStop=/usr/bin/docker stop nzbhydra2
 
 [Install]
 WantedBy=multi-user.target

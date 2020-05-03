@@ -8,16 +8,17 @@ Restart=always
 RestartSec=30
 
 ExecStart=/usr/bin/docker run --rm \
-  --name=radarr \
-  -v /volumes/radarr/config:/config \
-  -v /mnt:/mnt \
-  -e PGID=1000 \
+  --name=sonarr \
   -e PUID=1000 \
+  -e PGID=1000 \
   -e TZ=America/Chicago \
-  -p 7878:7878 \
-  linuxserver/radarr
+  -e UMASK_SET=022 \
+  -p 8989:8989 \
+  -v /volumes/sonarr/config:/config \
+  -v /mnt:/mnt \
+linuxserver/sonarr
 
-ExecStop=/usr/bin/docker stop radarr
+ExecStop=/usr/bin/docker stop sonarr
 
 [Install]
 WantedBy=multi-user.target
