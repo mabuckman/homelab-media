@@ -6,14 +6,14 @@ After=docker.service
 [Service]
 Restart=always
 RestartSec=30
-
-ExecStart=/usr/bin/docker run --rm \
+ExecStartPre=-/usr/bin/docker stop ouroboros
+ExecStartPre=-/usr/bin/docker rm ouroboros
+ExecStart=/usr/bin/docker run \
   --name ouroboros \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -e NOTIFIERS='discord:/webhook_id/webhook_token' \
+  -e NOTIFIERS='discord://' \
   -e TZ=America/Chicago \
 pyouroboros/ouroboros
-
 ExecStop=/usr/bin/docker stop ouroboros
 
 [Install]

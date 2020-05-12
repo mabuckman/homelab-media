@@ -6,8 +6,9 @@ After=docker.service
 [Service]
 Restart=always
 RestartSec=30
-
-ExecStart=/usr/bin/docker run --rm \
+ExecStartPre=-/usr/bin/docker stop jackett
+ExecStartPre=-/usr/bin/docker rm jackett
+ExecStart=/usr/bin/docker run \
   --name=jackett \
   -e PUID=1000 \
   -e PGID=1000 \
@@ -15,8 +16,7 @@ ExecStart=/usr/bin/docker run --rm \
   -p 9117:9117 \
   -v /volumes/jackett/config:/config \
   -v /volumes/jackett/downloads:/downloads \
-  linuxserver/jackett
-
+linuxserver/jackett
 ExecStop=/usr/bin/docker stop jackett
 
 [Install]
