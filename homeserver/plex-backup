@@ -1,0 +1,16 @@
+#!/bin/bash
+
+plex_dir="/var/lib/plexmediaserver/Library/Application Support/Plex Media Server"
+db_dir="$plex_dir/Plug-in Support/Databases"
+
+echo ".dump metadata_item_settings" | sqlite3 "$db_dir/com.plexapp.plugins.library.db" | grep -v TABLE | grep -v INDEX > /tmp/settings.sql
+
+time=$(date +"%Y-%m-%dT%H-%M-%S");
+zip_file="/tmp/plex-$time.zip"
+
+zip "$zip_file" "$plex_dir/Preferences.xml" /tmp/settings.sql
+
+remote="b2"
+bucket="buck-config-files"
+
+rclone copy "$zip_file" "$remote":"$bucket"
