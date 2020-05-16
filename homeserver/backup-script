@@ -1,10 +1,26 @@
 #!/bin/bash
 
+# Directory that contains folders to backup
 directory=/volumes/
+time=$(date +"%Y-%m-%dT%H-%M-%S");
+zip_files=()
 
 for d in ${directory}*/ ; do
-	time=$(date +"%Y-%m-%dT%H:%M:%S");
-	file="${directory}backups/${d:${#directory}:-1}-${time}.zip";
-	echo ${file};
-	zip -r ${file} ${d} -x "*config/MediaCover*";
+    # Grab name of folder
+    folder=`basename "$d"`
+    # Create zip file name and append to array
+    zip_file="/tmp/${folder}-${time}.zip";
+    zip_files+=("$zip_file")
+
+    # Omit media files and backup folders
+	zip -r ${zip_file} ${d} -x "*config/MediaCover*" -x "*config/backup*";
+done
+
+remote=""
+bucket=""
+
+# Copy to cloud storage
+for file in "${zip_files[@]}"
+do
+    rclone copy "$file" "$remote":"$bucket" --progress
 done

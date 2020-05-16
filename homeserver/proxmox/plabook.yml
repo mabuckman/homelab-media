@@ -1,0 +1,14 @@
+- name: Network Getting Started First Playbook
+  connection: network_cli
+  gather_facts: false
+  hosts: all
+  tasks:
+  - proxmox:
+    vmid: 300
+    node: lab
+    api_user: root@pam
+    api_password: DuPD@K2Tryse
+    api_host: node1
+    password: 123456
+    hostname: apivm
+    ostemplate: 'local:ubuntu-18.04-standard_18.04.1-1_amd64.tar.gz'
