@@ -22,5 +22,5 @@ bucket=""
 # Copy to cloud storage
 for file in "${zip_files[@]}"
 do
-    rclone copy "$file" "$remote":"$bucket" --progress
+    rclone copy "$file" "$remote":"$bucket"
 done
