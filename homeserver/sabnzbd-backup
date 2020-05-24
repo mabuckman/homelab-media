@@ -1,0 +1,13 @@
+#!/bin/bash
+
+dir="/root/.sabnzbd"
+
+time=$(date +"%Y-%m-%dT%H-%M-%S");
+zip_file="/tmp/sabnzbd-$time.zip"
+
+zip "$zip_file" "$dir/sabnzbd.ini"
+
+remote="b2"
+bucket="buck-config-files"
+
+rclone copy "$zip_file" "$remote":"$bucket"
