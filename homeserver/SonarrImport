@@ -1,0 +1,11 @@
+#!/bin/bash
+
+data='{"path":"'
+data+=$1
+data+='", "name":"DownloadedEpisodesScan"}'
+
+curl -d "$data" -H "Content-Type: application/json" -X POST -o /dev/null http://192.168.1.3:8989/api/command?apikey=04c1cad523cd43ae86fbf6bb2171ddb7
+
+echo "Completed"
+
+exit 0

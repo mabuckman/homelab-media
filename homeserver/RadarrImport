@@ -1,0 +1,18 @@
+#!/bin/bash
+
+data='{"path":"'
+data+=$1
+data+='", "name":"DownloadedMoviesScan"}'
+
+# Tell Radarr to import movie
+curl -d "$data" -H "Content-Type: application/json" -X POST -o /dev/null http://192.168.1.3:7878/api/command?apikey=635d27a33ea249348c7fe33845f6aee9
+
+# Wait for Radarr to import
+sleep 5
+
+# Scan Plex library
+curl 192.168.1.7:32400/library/sections/1/refresh?X-Plex-Token=LF6zLSCe5JWD-eNakSdT
+
+echo "Completed"
+
+exit 0
